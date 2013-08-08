@@ -1,0 +1,103 @@
+<p>
+<%
+def merge(msg)
+
+array = msg.split
+msg = ""
+array.each do |nome|
+if nome.include? "@"
+
+else 
+if nome.include?"t.co/"
+
+else
+msg = msg + " " + nome
+end
+end
+
+end
+msg = msg.gsub("Av.","Avenida")
+msg = msg.gsub("JCTransito said","")
+msg = msg.gsub("_","")
+msg = msg.gsub("(Via","")
+msg = msg.gsub("(via","")
+msg = msg.gsub("http://","")
+msg = msg.gsub("-"," ")
+msg = msg[0,100]
+
+end
+
+
+%>
+<script language="javascript">
+function timer()
+{
+$("#conteudo").html("");
+$("#conteudo").load("#");
+//window.location.reload(); // atualiza a página
+//$('#conteudo').load("192.168.1.2:3000/todas1");
+}
+setTimeout("timer()",15000); // executa a função timer a cada 5 segundos.
+</script>
+
+</p> 
+<div id="conteudo">
+<%  
+if session[:user] == nil
+session[:user] = 1;
+else
+session[:user] = session[:user] + 1;
+end
+contador = 0
+@msgs.each do |mensagem| %>
+
+<p>
+<center>
+<table width="200px">
+<tr><td>
+<center>
+<%= merge(mensagem) %>
+</center>
+</td></tr>
+</table>
+</center>
+<%
+
+if contador == session[:user]
+%>
+<iframe src="https://dl.dropboxusercontent.com/u/9106367/tootip.html?<%= merge(mensagem) %>" style="visibility:hidden;display:none"></iframe>
+<%end 
+
+contador = contador +1
+
+%>
+</p>
+</div>
+
+<% 
+
+end %>
+<table border="0" width="100%">
+<tr>
+<br/>
+<center><img src="https://si0.twimg.com/profile_images/819932409/jc-transito_normal.jpg"/>
+<br/>
+</tr>
+<tr>
+<td>
+<br/>
+<br/>
+<br/>
+<center>Compativel com</td>
+<tr>
+<tr>
+<td><center>
+
+<img src="http://goodlogo.com/images/logos/safari_logo_3023.jpg" width="100"/>
+<img src="http://www.boland-devries.nl/testsite/Google-Chrome-logo.jpg" width="100"/>
+
+</td>
+
+<tr>
+
+</table>
